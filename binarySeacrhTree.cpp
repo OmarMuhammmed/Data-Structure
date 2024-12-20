@@ -3,6 +3,7 @@ using namespace std;
 
 class BST {
     private:
+
         struct Node
         {
             int data;
@@ -16,18 +17,74 @@ class BST {
             }
         };
 
-      
         Node *root = nullptr;
+
+        void recursiveInsert(Node *temp , int value)
+        {
+            if(value <= temp->data)
+            {
+                if (temp->left == nullptr)
+                {  
+                    temp->left = new Node(value);
+                }
+                else 
+                {
+                    recursiveInsert(temp->left , value);
+                }
+            }
+            else 
+            {
+                if (temp->right == nullptr)
+                {
+                    temp->right = new Node(value);
+                }
+                else 
+                {
+                    recursiveInsert(temp->right , value);
+                }
+            }
+        }
+        
+        int getMaxRecursive(Node* temp)
+        {
+            if (temp->right == nullptr)
+            {
+                return temp->data;
+            }
+            else 
+            {
+                return getMaxRecursive(temp->right);
+            }
+        }
+
+        int getMinRecursive(Node* temp)
+        {
+            if (temp->left == nullptr)
+            {
+                return temp->data;
+            }
+            else 
+            {
+                return getMinRecursive(temp->left);
+            }
+        }
+
+        int getHeightHelper(Node* temp)
+        {
+            if (temp == nullptr)
+            {
+                return -1;
+            }
+            // H = 1 + max (left subtree height        , right subtree height)
+            return 1 + max(getHeightHelper(temp->left) , getHeightHelper(temp->right));
+        }
 
     public:
         // with iterative method
-        void insert(int value)
+        void insertIterative(int value)
         {
-            Node* newNode = new Node; // create a new node in the heap memory
-            newNode->data = value;
-            newNode->left = nullptr; // because it added a leaf node
-            newNode->right = nullptr; // ```````````````````````````
-        
+            Node* newNode = new Node(value); // create a new node in the heap memory
+            
             if (root == nullptr) // the tree is Empty
             {
                 root = newNode; // frist node in the tree
@@ -61,34 +118,8 @@ class BST {
             }
         }
         
-        void recursiveInsert(Node *temp , int value)
-        {
-            if(value <= temp->data)
-            {
-                if (temp->left == nullptr)
-                {  
-                    temp->left = new Node(value);
-                }
-                else 
-                {
-                    recursiveInsert(temp->left , value);
-                }
-            }
-            else 
-            {
-                if (temp->right == nullptr)
-                {
-                    temp->right = new Node(value);
-                }
-                else 
-                {
-                    recursiveInsert(temp->right , value);
-                }
-            }
-        }
-        
         // with recursive method
-        void add(int value)
+        void insertRecursive(int value)
         {
             if (root==nullptr)
             {
@@ -99,13 +130,66 @@ class BST {
                 recursiveInsert(root , value);
             }
         }
-         
+
+        // with Iterative method
+        int getMax()
+        {
+            Node* temp = root; // track the root node
+            while (temp->right != nullptr)
+            {
+                temp = temp->right;
+            }
+            return temp->data;
+        }       
+       
+        int getMin()
+        {
+            Node* temp = root; // track the root node
+            while (temp->left != nullptr)
+            {
+                temp = temp->left;
+            }
+            return temp->data;
+        } 
+
+        // with recursive method
+        int getmax()
+        {
+            return getMaxRecursive(root);
+        }
+
+        int getmin()
+        {
+            return getMinRecursive(root);
+        }
+
+        int getHeight(Node* temp)
+        {
+            if (root==nullptr)
+            {
+                return -1 ;
+            }
+            else 
+            {
+                return getHeightHelper(root);
+            }
+        }
 };
 
 
 
 int main() {
-   
+
+    BST tree;
+    tree.insertIterative(10);
+    tree.insertIterative(5);
+    tree.insertIterative(15);
+    tree.insertIterative(3);
+    tree.insertIterative(7);
+    tree.insertIterative(12);
+    tree.insertIterative(18);
+    cout<<"Max : "<<tree.getMax();
+    cout<<"\nMin : "<<tree.getMin();
     return 0;
 }
 

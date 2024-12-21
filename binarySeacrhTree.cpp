@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class BST {
@@ -174,6 +175,27 @@ class BST {
                 return getHeightHelper(root);
             }
         }
+
+
+        void displayLevelOrder()
+        {
+            if (root == nullptr) return ; 
+            queue<Node*> q ; 
+            q.push(root) ; 
+
+            while(!q.empty())
+            {
+                Node* current = q.front();
+                q.pop() ;
+
+                cout << current->data <<" ";
+                if (current->left != nullptr) 
+                    q.push(current->left);
+                if (current->right != nullptr)
+                    q.push(current->right);
+            }    
+            cout<<endl;
+        }
 };
 
 
@@ -189,7 +211,8 @@ int main() {
     tree.insertIterative(12);
     tree.insertIterative(18);
     cout<<"Max : "<<tree.getMax();
-    cout<<"\nMin : "<<tree.getMin();
+    cout<<"\nMin : "<<tree.getMin()<<endl;
+    tree.displayLevelOrder();
     return 0;
 }
 

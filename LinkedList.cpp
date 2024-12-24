@@ -2,55 +2,61 @@
 using namespace std;
 
 
-struct Node // Strcut with type node
+struct Node 
 {
     int data = 0 ; 
-    Node *next ; // ptr with type node with next value
+    Node *next ; 
 };
 
-Node *head = NULL ; // ptr with type node with head value
+Node *head = NULL ; 
 
-void insertNode(int data)
+void insertNode(int value)
 {
-    Node *newNode ; 
-    Node *last ; 
-    newNode = new Node ; 
-    newNode -> data = data ; 
+   Node *newNode = new Node ;  
+   newNode -> data = value ; 
 
-    if (head == NULL) {  
-        head = newNode ; 
-        newNode -> next = NULL ; 
+   if(head == NULL)
+   {
+    head = newNode ; 
+    newNode -> next = NULL ; 
+   }
+   else 
+   {
+    Node *current = head ; 
+    while (current->next != NULL)
+    {
+        current = current -> next ; 
     }
-    else {
-        last = head ; // last ptr points to head 
-        while(last -> next != NULL){ 
-            last = last -> next ; 
-        }
-        last -> next = newNode ; 
-        newNode -> next = NULL ; 
-    }
+    current -> next = newNode ; //
+    newNode -> next = NULL ; 
+   }
 }
+
 
 void display()
 {
-    Node *currentNode ; 
-    if (head == NULL) cout << "Linked List is Empty \n" ; 
+    Node *currentNode ;
+    if (head=NULL) cout << "Linked List Empty\n";
     else 
     {
-        currentNode = head ; 
-        while (currentNode != NULL)
+        currentNode = head ;
+        while (currentNode != NULL) // haed != NULL
         {
-            cout << currentNode -> data << "\n" ;
-            currentNode = currentNode -> next ;
+            cout << currentNode ->data <<endl;
+            currentNode = currentNode ->next ; 
         }
-        
     }
 }
 
+
 int main()
 {
-    // insertNode(10);
-    // insertNode(20);
+    insertNode(77);
+    insertNode(22);
+    insertNode(22);
+    insertNode(22);
+    insertNode(22);
+    insertNode(22);
     display();
     return 0 ; 
 }

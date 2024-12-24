@@ -9,7 +9,7 @@ class Stack {
 public:
     int arrayStack[MAX]; // Maximum size of Stack
 
-    Stack() { top = -1; } // when you create object top is -1
+    Stack() { top = -1; } // when you create object top is -1  Top is index not value 
     bool push(int x);
     int pop();
     int peek();

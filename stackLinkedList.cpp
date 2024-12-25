@@ -3,21 +3,26 @@ using namespace std;
 
 class Node {
 public:
+
     int data;
     Node* next;
-    Node(int new_data) {
-        this->data = new_data;
-        this->next = nullptr;
+
+    Node(int value) {
+        data = value;
+        next = nullptr;
     }
 };
 
 class Stack {
    
-    Node* top;
+    Node *top; // pointer with type Node 
 
 public:
     
-    Stack() { this->top = nullptr; }
+    Stack() 
+    { 
+        top = nullptr;
+    }
 
     
     bool isEmpty() 
@@ -25,43 +30,41 @@ public:
         return top == nullptr;
     }
 
-    // Function to push an element onto the stack
+    
     void push(int data) 
     {
-      
-        // Create a new node with given data
         Node* new_node = new Node(data);
 
-        // Check if memory allocation for the new node
-        if (!new_node) {
+        if (!new_node)
+        { 
             cout << "\nStack Overflow";
         }
 
-        // Link the new node to the current top node
-        new_node->next = top;
+        if (top == nullptr) // if stack is empty
+        { 
+            top = new_node;
+            new_node -> next = nullptr;
+            return;
+        }
 
-        // Update the top to the new node
+        new_node -> next = top;
+
         top = new_node;
     }
 
-    // Function to remove the top element from the stack
     void pop() 
     {
-
-       
-        if (this->isEmpty()) {
-            cout << "\nStack Underflow" << endl;
+        if (isEmpty()) {
+            cout << "\n Stack is Empty " << endl;
         }
-        else {
-            
-            // Assign the current top to a temporary
-            Node* del = top;
 
-            // Update the top to the next node
+        else {    
+
+            Node* temp = top;
+
             top = top->next;
 
-            // Deallocate the memory of the old top node
-            delete del;
+            delete temp;
         }
     }
 

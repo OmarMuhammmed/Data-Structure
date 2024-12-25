@@ -6,10 +6,11 @@ class Node {
 public:
     int data;
     Node* next;
+
     Node(int new_data)
     {
-        this->data = new_data;
-        this->next = nullptr;
+        data = new_data;
+        next = nullptr;
     }
 };
 
@@ -27,68 +28,57 @@ public:
         return (front == nullptr);
     }
 
-    // Function to add an element to the queue
+    
     void enqueue(int new_data) {
 
-        // Create a new linked list node
         Node* new_node = new Node(new_data);
 
-        // If queue is empty, the new node is both the front
-        // and rear
-        if (this->isEmpty()) {
+        if (isEmpty()) {
             front = rear = new_node;
+            new_node->next = nullptr;
             return;
         }
 
-        // Add the new node at the end of the queue and
-        // change rear
-        rear->next = new_node;
+       
+        rear->next = new_node; // link between the last node and the new node
         rear = new_node;
+        new_node->next = nullptr;
     }
 
-    // Function to remove an element from the queue
+  
     void dequeue() {
 
-        // If queue is empty, return
+        
         if (this->isEmpty()) {
             cout << "Queue Underflow\n";
             return;
         }
 
-        // Store previous front and move front one node
-        // ahead
         Node* temp = front;
         front = front->next;
-
-        // If front becomes nullptr, then change rear also
-        // to nullptr
+        
         if (front == nullptr)
             rear = nullptr;
 
-        // Deallocate memory of the old front node
         delete temp;
     }
 
-    // Function to get the front element of the queue
+    
     int getFront() {
       
-      // Checking if the queue is empty
-        if (this->isEmpty()) {
+        if (isEmpty()) {
             cout << "Queue is empty\n";
-            return INT_MIN;
         }
         return front->data;
     }
 
-    // Function to get the rear element of the queue
+    
     int getRear() {
 
-      // Checking if the queue is empty
         if (this->isEmpty()) {
             cout << "Queue is empty\n";
-            return INT_MIN;
+          
         }
-      
         return rear->data;
     }
 };

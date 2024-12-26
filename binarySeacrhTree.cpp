@@ -79,6 +79,66 @@ class BST {
             // H = 1 + max (left subtree height        , right subtree height)
             return 1 + max(getHeightHelper(temp->left) , getHeightHelper(temp->right));
         }
+        
+        void PreOder(Node* temp)
+        {
+            if (temp == nullptr) return ;
+            cout<< temp->data <<" ";
+            PreOder(temp->left);
+            PreOder(temp->right);
+        }
+
+        void InOder(Node* temp)
+        {
+            if (temp == nullptr) return ;
+            PreOder(temp->left);
+            cout<< temp->data <<" ";
+            PreOder(temp->right);
+        }
+
+        void PostOder(Node* temp)
+        {
+            if (temp == nullptr) return ;
+            PostOder(temp->left);
+            PostOder(temp->right);
+            cout<< temp->data <<" ";
+        }
+
+        Node * removeHelper(Node *root, int value)
+        {
+            if (root == nullptr) return root;
+
+            else if (value < root->data)
+            {
+                root->left = removeHelper(root->left , value);
+            }
+            else if (value > root->data)
+            {
+                root->right = removeHelper(root->right , value);
+            }
+            else 
+            {
+                if (root->left == nullptr)
+                {
+                    Node* temp = root->right;
+                    delete root;
+                    return temp;
+                }
+                else if (root->right == nullptr)
+                {
+                    Node* temp = root->left;
+                    delete root;
+                    return temp;
+                }
+                else 
+                {
+                    int maxvalue = getMaxRecursive(root->left);
+                    root->data = maxvalue;
+                    root->left = removeHelper(root->left , maxvalue);
+                }
+               
+            }
+        }
 
     public:
         // with iterative method
@@ -195,6 +255,35 @@ class BST {
                     q.push(current->right);
             }    
             cout<<endl;
+        }
+
+        void displayPreOrder()
+        {
+            if(root != nullptr)
+            {
+                PreOder(root);
+            }
+        }
+
+        void displayInOrder()
+        {
+            if(root != nullptr)
+            {
+                InOder(root);
+            }
+        }
+
+        void displayPostOrder()
+        {
+            if(root != nullptr)
+            {
+                PostOder(root);
+            }
+        }
+
+        void remove(int data)
+        {
+            root = removeHelper(root , data);
         }
 };
 

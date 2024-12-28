@@ -43,7 +43,7 @@ bool search(Node* root, int val) {
     { 
         return false;
     }
-
+    
     if (root->data == val) // Base case (لقينا القيمة)
     {  
         return true;
@@ -71,7 +71,7 @@ Node* findMin(Node* root)
 }
 
 
-
+     
 Node* deleteNode(Node* root, int val) 
 {
     if (root == nullptr) { // Base case (لو وصلنا لأخر التري وملقناش القيمه) 
@@ -114,36 +114,35 @@ Node* deleteNode(Node* root, int val)
     return root;
 }
 
-// 4. Functions للمرور على الشجرة (Traversal)
 
-// (a) Inorder Traversal (ترتيب تصاعدي)
+// Inorder Traversal 
 void inorder(Node* root) {
     if (root == nullptr) return;
-    inorder(root->left);  // الأول ندخل الشمال
-    cout << root->data << " ";  // نطبع القيمة
-    inorder(root->right);  // بعدين ندخل اليمين
+    inorder(root->left); 
+    cout << root->data << " ";  
+    inorder(root->right);  
 }
 
-// (b) Preorder Traversal
+// Preorder Traversal
 void preorder(Node* root) {
     if (root == nullptr) return;
-    cout << root->data << " ";  // نطبع القيمة الأول
-    preorder(root->left);  // بعدين ندخل الشمال
-    preorder(root->right);  // وبعدين اليمين
+    cout << root->data << " ";  
+    preorder(root->left);  
+    preorder(root->right);  
 }
 
-// (c) Postorder Traversal
+// Postorder Traversal
 void postorder(Node* root) {
     if (root == nullptr) return;
-    postorder(root->left);  // ندخل الشمال الأول
-    postorder(root->right);  // بعدين اليمين
-    cout << root->data << " ";  // نطبع القيمة في الآخر
+    postorder(root->left);  
+    postorder(root->right);  
+    cout << root->data << " ";  
 }
 
 int main() {
-    Node* root = nullptr;  // الشجرة فاضية في البداية
+    Node* root = nullptr;  // Tree is empty in start
 
-    // إدخال القيم
+    
     root = insert(root, 50);
     root = insert(root, 30);
     root = insert(root, 70);
@@ -151,14 +150,14 @@ int main() {
     root = insert(root, 40);
 
     cout << "Inorder Traversal: ";
-    inorder(root);  // طباعة القيم بترتيب تصاعدي
+    inorder(root); 
     cout << endl;
 
     cout << "Search for 40: " << (search(root, 40) ? "Found" : "Not Found") << endl;
 
-    root = deleteNode(root, 50);  // حذف القيمة 50
+    root = deleteNode(root, 50);  
     cout << "After Deletion of 50 (Inorder Traversal): ";
-    inorder(root);  // طباعة القيم بعد الحذف
+    inorder(root);  
     cout << endl;
 
     cout << "Preorder Traversal: ";

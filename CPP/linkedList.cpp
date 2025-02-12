@@ -113,7 +113,7 @@ void Max()
 void Even()
 {
   Node* Temp = head;
-  while(Temp != NULL)
+  while(Temp != nullptr)
   {
   	 if(Temp->data%2==0)
   	{
@@ -129,6 +129,27 @@ void insFront(int value)
 	newNode->next = head;  
 	head = newNode;
 }
+
+// defulat insert 
+// void insLast(int value)
+// {
+// 	Node* newNode=new Node(value);   
+// 	newNode->next=nullptr;
+
+// 	if(head == nullptr)
+// 	{
+// 		head = newNode;
+// 	}
+
+// 	else
+// 	{
+// 		Node* Temp = head;  
+// 		while(Temp->next != nullptr)
+// 			Temp = Temp->next;  
+// 		Temp->next = newNode;
+// 	}
+// }
+
 
 int main()
 {
